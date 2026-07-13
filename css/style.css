@@ -1,0 +1,12 @@
+@font-face {
+ font-family: 'Retro Mango';
+ src: url('fonts/Retro Mango DEMO.ttf') format('truetype');
+ font-weight: normal;
+ font-style: normal;
+}
+
+.store-title {
+ text align: left;
+ font-family: 'Retro Mango', 'Courier New', monospace;
+ font-size: 40px;
+}
