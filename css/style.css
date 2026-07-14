@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-  font-family: 'Overcame', 'Courier New', monospace;
+  font-family: 'Jost Black', 'Courier New', monospace;
   color: #222;
 }
 
@@ -20,8 +20,8 @@ body {
 }
 
 @font-face {
-  font-family: 'Overcame';
-  src: url('fonts/overcame-demo.regular.ttf') format('truetype');
+  font-family: 'Jost Black';
+  src: url('fonts/jost.black.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -51,7 +51,7 @@ body {
   color: black;
   margin: 5px;
   padding: 6px 10px;
-  font-family: 'Overcame', 'Courier New', monospace;
+  font-family: 'Jost Black', 'Courier New', monospace;
   text-decoration: none;
   font-weight: bold;
   font-size: 13px;
