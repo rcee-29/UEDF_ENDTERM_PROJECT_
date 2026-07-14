@@ -24,19 +24,128 @@
         <h2>Shop LEGO Sets</h2>
     </section>
 
-    <section class="products">
-        <div class="product">
-            <img src="./images/75389-dark-falcon.png" alt="LEGO Star Wars The Dark Falcon set 75389" class="product-image">
-            <p class="product-name">LEGO Star Wars: The Dark Falcon (75389)</p>
-        </div>
-        <div class="product">Product 2</div>
-        <div class="product">Product 3</div>
-        <div class="product">Product 4</div>
-    </section>
+    <div class="shop-layout">
+
+        <section class="products">
+            <div class="product">
+                <img src="./images/75389-dark-falcon.png" alt="LEGO Star Wars The Dark Falcon set 75389" class="product-image">
+                <div class="product-details">
+                    <p class="product-name">LEGO Star Wars: The Dark Falcon (75389)</p>
+                    <p class="product-price">$179.99</p>
+                    <button class="add-to-cart-btn" data-name="LEGO Star Wars: The Dark Falcon (75389)" data-price="179.99">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-details">
+                    <p class="product-name">Product 2</p>
+                    <p class="product-price">$0.00</p>
+                    <button class="add-to-cart-btn" data-name="Product 2" data-price="0.00">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-details">
+                    <p class="product-name">Product 3</p>
+                    <p class="product-price">$0.00</p>
+                    <button class="add-to-cart-btn" data-name="Product 3" data-price="0.00">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-details">
+                    <p class="product-name">Product 4</p>
+                    <p class="product-price">$0.00</p>
+                    <button class="add-to-cart-btn" data-name="Product 4" data-price="0.00">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <aside class="cart-panel">
+            <h3>Your Cart</h3>
+            <ul id="cart-items">
+                <li class="cart-empty">Your cart is empty.</li>
+            </ul>
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+        </aside>
+
+    </div>
 
     <footer>
         <p>© 2026 To be Announced</p>
     </footer>
+
+    <script>
+        // --- Simple working cart panel (stored in localStorage) ---
+        function getCart() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function renderCart() {
+            const cart = getCart();
+            const list = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total-price');
+            list.innerHTML = '';
+
+            if (cart.length === 0) {
+                list.innerHTML = '<li class="cart-empty">Your cart is empty.</li>';
+                totalEl.textContent = '$0.00';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+
+                const li = document.createElement('li');
+
+                const nameSpan = document.createElement('span');
+                nameSpan.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.className = 'cart-item-remove';
+                removeBtn.addEventListener('click', () => removeFromCart(index));
+
+                li.appendChild(nameSpan);
+                li.appendChild(removeBtn);
+                list.appendChild(li);
+            });
+
+            totalEl.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function addToCart(name, price) {
+            const cart = getCart();
+            cart.push({ name, price });
+            saveCart(cart);
+            renderCart();
+        }
+
+        function removeFromCart(index) {
+            const cart = getCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+            renderCart();
+        }
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const name = btn.getAttribute('data-name');
+                const price = parseFloat(btn.getAttribute('data-price'));
+                addToCart(name, price);
+            });
+        });
+
+        renderCart();
+    </script>
 
 </body>
 </html>
