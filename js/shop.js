@@ -79,10 +79,12 @@ function renderCart() {
  
     let total = 0;
     cart.forEach((item, index) => {
-        total += item.price;
+        const lineTotal = item.price * item.qty;
+        total += lineTotal;
+
         const li = document.createElement('li');
         const nameSpan = document.createElement('span');
-        nameSpan.textContent = `${item.name} - ₱${item.price.toFixed(2)}`;
+        nameSpan.textContent = `${item.name} (${item.qty}x) - ₱${lineTotal.toFixed(2)}`;
  
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
@@ -97,9 +99,16 @@ function renderCart() {
     totalEl.textContent = `₱${total.toFixed(2)}`;
 }
  
-function addToCart(name, price) {
+function addToCart(name, price, qty = 1) {
     const cart = getCart();
-    cart.push({ name, price });
+    const existing = cart.find(item => item.name === name && item.price === price);
+
+    if (existing) {
+        existing.qty += qty;
+    } else {
+        cart.push({ name, price, qty });
+    }
+
     saveCart(cart);
     renderCart();
 }
@@ -142,9 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const qtyInput = btn.closest('.product-details').querySelector('.qty-input');
         const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
 
-        for (let i = 0; i < qty; i++) {
-            addToCart(name, price);
-        }
+        addToCart(name, price, qty);
     });
 });
- 
