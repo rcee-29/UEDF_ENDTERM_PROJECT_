@@ -83,70 +83,68 @@
 
     <script>
         function getCart() {
-            return JSON.parse(localStorage.getItem('cart')) || [];
-        }
+    return JSON.parse(localStorage.getItem('cart')) || [];
+}
 
-        function saveCart(cart) {
-            localStorage.setItem('cart', JSON.stringify(cart));
-        }
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 
-        function renderCart() {
-            const cart = getCart();
-            const list = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total-price');
-            list.innerHTML = '';
+function renderCart() {
+    const cart = getCart();
+    const list = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total-price');
+    list.innerHTML = '';
 
-            if (cart.length === 0) {
-                list.innerHTML = '<li class="cart-empty">Your cart is empty.</li>';
-                totalEl.textContent = '₱0.00';
-                return;
-            }
+    if (cart.length === 0) {
+        list.innerHTML = '<li class="cart-empty">Your cart is empty.</li>';
+        totalEl.textContent = '₱0.00';
+        return;
+    }
 
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price;
+    let total = 0;
+    cart.forEach((item, index) => {
+        total += item.price;
+        const li = document.createElement('li');
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = `${item.name} - ₱${item.price.toFixed(2)}`;
 
-                const li = document.createElement('li');
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+        removeBtn.className = 'cart-item-remove';
+        removeBtn.addEventListener('click', () => removeFromCart(index));
 
-                const nameSpan = document.createElement('span');
-                nameSpan.textContent = '₱{item.name}' - '₱'₱{item.price.toFixed(2)};
+        li.appendChild(nameSpan);
+        li.appendChild(removeBtn);
+        list.appendChild(li);
+    });
 
-                const removeBtn = document.createElement('button');
-                removeBtn.textContent = 'Remove';
-                removeBtn.className = 'cart-item-remove';
-                removeBtn.addEventListener('click', () => removeFromCart(index));
+    totalEl.textContent = `₱${total.toFixed(2)}`;
+}
 
-                li.appendChild(nameSpan);
-                li.appendChild(removeBtn);
-                list.appendChild(li);
-            });
+function addToCart(name, price) {
+    const cart = getCart();
+    cart.push({ name, price });
+    saveCart(cart);
+    renderCart();
+}
 
-            totalEl.textContent = '₱'₱{total.toFixed(2)};
-        }
+function removeFromCart(index) {
+    const cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+    renderCart();
+}
 
-        function addToCart(name, price) {
-            const cart = getCart();
-            cart.push({ name, price });
-            saveCart(cart);
-            renderCart();
-        }
+document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const name = btn.getAttribute('data-name');
+        const price = parseFloat(btn.getAttribute('data-price'));
+        addToCart(name, price);
+    });
+});
 
-        function removeFromCart(index) {
-            const cart = getCart();
-            cart.splice(index, 1);
-            saveCart(cart);
-            renderCart();
-        }
-
-        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const name = btn.getAttribute('data-name');
-                const price = parseFloat(btn.getAttribute('data-price'));
-                addToCart(name, price);
-            });
-        });
-
-        renderCart();
+renderCart();
     </script>
 
 </body>
