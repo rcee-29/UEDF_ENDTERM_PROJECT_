@@ -30,9 +30,9 @@
             <div class="product">
                 <img src="./images/75192_Prod.png" alt="LEGO Star Wars: Millennium Falcon" class="product-image">
                 <div class="product-details">
-                    <p class="product-name">LEGO Star Wars: Millennium Falcon(75192)</p>
+                    <p class="product-name">LEGO Star Wars: Millennium Falcon (75192)</p>
                     <p class="product-price">₱52,498</p>
-                    <button class="add-to-cart-btn" data-name="LEGO Star Wars: The Dark Falcon (75389)" data-price="179.99">Add to Cart</button>
+                    <button class="add-to-cart-btn" data-name="LEGO Star Wars: Millennium Falcon (75192)" data-price="52498">Add to Cart</button>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                 <div class="product-details">
                     <p class="product-name">LEGO Star Wars: Death Star (75419)</p>
                     <p class="product-price">₱61,619</p>
-                    <button class="add-to-cart-btn" data-name="Product 2" data-price="0.00">Add to Cart</button>
+                    <button class="add-to-cart-btn" data-name="LEGO Star Wars: Death Star (75419)" data-price="61619">Add to Cart</button>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                 <div class="product-details">
                     <p class="product-name">LEGO Star Wars: AT-AT (75288)</p>
                     <p class="product-price">₱8,326</p>
-                    <button class="add-to-cart-btn" data-name="Product 3" data-price="0.00">Add to Cart</button>
+                    <button class="add-to-cart-btn" data-name="LEGO Star Wars: AT-AT (75288)" data-price="8326">Add to Cart</button>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
                 <div class="product-details">
                     <p class="product-name">LEGO Star Wars: R2D2 (75379)</p>
                     <p class="product-price">₱6,106</p>
-                    <button class="add-to-cart-btn" data-name="Product 4" data-price="0.00">Add to Cart</button>
+                    <button class="add-to-cart-btn" data-name="LEGO Star Wars: R2D2 (75379)" data-price="6106">Add to Cart</button>
                 </div>
             </div>
         </section>
@@ -71,7 +71,7 @@
             </ul>
             <div class="cart-total">
                 <span>Total</span>
-                <span id="cart-total-price">$0.00</span>
+                <span id="cart-total-price">₱0.00</span>
             </div>
         </aside>
 
@@ -83,68 +83,68 @@
 
     <script>
         function getCart() {
-    return JSON.parse(localStorage.getItem('cart')) || [];
-}
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
 
-function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
+        function saveCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
 
-function renderCart() {
-    const cart = getCart();
-    const list = document.getElementById('cart-items');
-    const totalEl = document.getElementById('cart-total-price');
-    list.innerHTML = '';
+        function renderCart() {
+            const cart = getCart();
+            const list = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total-price');
+            list.innerHTML = '';
 
-    if (cart.length === 0) {
-        list.innerHTML = '<li class="cart-empty">Your cart is empty.</li>';
-        totalEl.textContent = '₱0.00';
-        return;
-    }
+            if (cart.length === 0) {
+                list.innerHTML = '<li class="cart-empty">Your cart is empty.</li>';
+                totalEl.textContent = '₱0.00';
+                return;
+            }
 
-    let total = 0;
-    cart.forEach((item, index) => {
-        total += item.price;
-        const li = document.createElement('li');
-        const nameSpan = document.createElement('span');
-        nameSpan.textContent = `${item.name} - ₱${item.price.toFixed(2)}`;
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                const li = document.createElement('li');
+                const nameSpan = document.createElement('span');
+                nameSpan.textContent = `${item.name} - ₱${item.price.toFixed(2)}`;
 
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove';
-        removeBtn.className = 'cart-item-remove';
-        removeBtn.addEventListener('click', () => removeFromCart(index));
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.className = 'cart-item-remove';
+                removeBtn.addEventListener('click', () => removeFromCart(index));
 
-        li.appendChild(nameSpan);
-        li.appendChild(removeBtn);
-        list.appendChild(li);
-    });
+                li.appendChild(nameSpan);
+                li.appendChild(removeBtn);
+                list.appendChild(li);
+            });
 
-    totalEl.textContent = `₱${total.toFixed(2)}`;
-}
+            totalEl.textContent = `₱${total.toFixed(2)}`;
+        }
 
-function addToCart(name, price) {
-    const cart = getCart();
-    cart.push({ name, price });
-    saveCart(cart);
-    renderCart();
-}
+        function addToCart(name, price) {
+            const cart = getCart();
+            cart.push({ name, price });
+            saveCart(cart);
+            renderCart();
+        }
 
-function removeFromCart(index) {
-    const cart = getCart();
-    cart.splice(index, 1);
-    saveCart(cart);
-    renderCart();
-}
+        function removeFromCart(index) {
+            const cart = getCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+            renderCart();
+        }
 
-document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const name = btn.getAttribute('data-name');
-        const price = parseFloat(btn.getAttribute('data-price'));
-        addToCart(name, price);
-    });
-});
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const name = btn.getAttribute('data-name');
+                const price = parseFloat(btn.getAttribute('data-price'));
+                addToCart(name, price);
+            });
+        });
 
-renderCart();
+        renderCart();
     </script>
 
 </body>
