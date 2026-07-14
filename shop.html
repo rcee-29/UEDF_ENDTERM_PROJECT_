@@ -109,7 +109,7 @@
                 const li = document.createElement('li');
 
                 const nameSpan = document.createElement('span');
-                nameSpan.textContent = `₱{item.name} - ₱₱{item.price.toFixed(2)}`;
+                nameSpan.textContent = '₱{item.name}' - '₱'₱{item.price.toFixed(2)};
 
                 const removeBtn = document.createElement('button');
                 removeBtn.textContent = 'Remove';
@@ -121,7 +121,7 @@
                 list.appendChild(li);
             });
 
-            totalEl.textContent = `₱₱{total.toFixed(2)}`;
+            totalEl.textContent = '₱'₱{total.toFixed(2)};
         }
 
         function addToCart(name, price) {
