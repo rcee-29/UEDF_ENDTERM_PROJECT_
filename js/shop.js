@@ -271,9 +271,9 @@ function renderCart() {
         removeBtn.className = 'cart-item-remove';
         removeBtn.addEventListener('click', () => removeFromCart(index));
 
-        li.appenDChild(nameSpan);
-        li.appenDChild(removeBtn);
-        list.appenDChild(li);
+        li.appendChild(nameSpan);
+        li.appendChild(removeBtn);
+        list.appendChild(li);
     });
 
     totalEl.textContent = `₱${total.toFixed(2)}`;
