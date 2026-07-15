@@ -82,7 +82,7 @@ const PRODUCTS = [
     },
     {
         category: 'ninjago',
-        image: './images/71741.jpg',
+        image: './images/71741_Prod.jpg',
         alt: 'ninjago',
         name: 'Lego Ninjago: City Gardens (71741)',
         price: 17270,
@@ -91,7 +91,7 @@ const PRODUCTS = [
     },
     {
         category: 'ninjago',
-        image: './images/71870.jpg',
+        image: './images/71870_Prod.jpg',
         alt: 'ninjago',
         name: 'Lego Ninjago: The Twin Titans Mech (71870)',
         price: 14124,
