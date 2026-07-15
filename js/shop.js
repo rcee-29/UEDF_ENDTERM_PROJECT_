@@ -135,36 +135,36 @@ const PRODUCTS = [
         featured: false
     },
     {
-        category: 'dc',
+        category: 'DC',
         image: './images/76240.jpg',
-        alt: 'dc',
+        alt: 'DC',
         name: 'Lego DC: Batmobile Tumbler (76240)',
         price: 13261,
         hasQty: true,
         featured: false
     },
     {
-        category: 'dc',
+        category: 'DC',
         image: './images/70922.jpg',
-        alt: 'dc',
+        alt: 'DC',
         name: 'Lego DC: The Joker Manor (70922)',
         price: 16592,
         hasQty: true,
         featured: false
     },
     {
-        category: 'dc',
+        category: 'DC',
         image: './images/76300_Prod.jpg',
-        alt: 'dc',
+        alt: 'DC',
         name: 'Lego DC: Arkham Asylum (76300)',
         price: 24610,
         hasQty: true,
         featured: true
     },
     {
-        category: 'dc',
+        category: 'DC',
         image: './images/76252.jpg',
-        alt: 'dc',
+        alt: 'DC',
         name: 'Lego DC: Batcave - Shadow Box (76252)',
         price: 19737,
         hasQty: true,
@@ -271,9 +271,9 @@ function renderCart() {
         removeBtn.className = 'cart-item-remove';
         removeBtn.addEventListener('click', () => removeFromCart(index));
 
-        li.appendChild(nameSpan);
-        li.appendChild(removeBtn);
-        list.appendChild(li);
+        li.appenDChild(nameSpan);
+        li.appenDChild(removeBtn);
+        list.appenDChild(li);
     });
 
     totalEl.textContent = `₱${total.toFixed(2)}`;
