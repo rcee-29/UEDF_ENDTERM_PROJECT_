@@ -87,7 +87,7 @@ const PRODUCTS = [
         name: 'Lego Ninjago: City Gardens (71741)',
         price: 17270,
         hasQty: true,
-        featured: false
+        featured: true
     },
     {
         category: 'ninjago',
@@ -95,6 +95,78 @@ const PRODUCTS = [
         alt: 'ninjago',
         name: 'Lego Ninjago: The Twin Titans Mech (71870)',
         price: 14124,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'marvel',
+        image: './images/76269.jpg',
+        alt: 'marvel',
+        name: 'Lego Marvel: Avengers Tower (76269)',
+        price: 30778,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'marvel',
+        image: './images/76178_Prod.jpg',
+        alt: 'marvel',
+        name: 'Lego Marvel: Daily Bugle (76178)',
+        price: 21526,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'marvel',
+        image: './images/76218.jpg',
+        alt: 'marvel',
+        name: 'Lego Marvel: Sanctum Sanctorum(76218)',
+        price: 12274,
+        hasQty: true,
+        featured: true
+    },
+    {
+        category: 'marvel',
+        image: './images/76042.jpg',
+        alt: 'marvel',
+        name: 'Lego Marvel:The SHIELD Helicarrier (76042)',
+        price: 21526,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'dc',
+        image: './images/76240.jpg',
+        alt: 'dc',
+        name: 'Lego DC: Batmobile Tumbler (76240)',
+        price: 13261,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'dc',
+        image: './images/70922.jpg',
+        alt: 'dc',
+        name: 'Lego DC: The Joker Manor (70922)',
+        price: 16592,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'dc',
+        image: './images/76300_Prod.jpg',
+        alt: 'dc',
+        name: 'Lego DC: Arkham Asylum (76300)',
+        price: 24610,
+        hasQty: true,
+        featured: true
+    },
+    {
+        category: 'dc',
+        image: './images/76252.jpg',
+        alt: 'dc',
+        name: 'Lego DC: Batcave - Shadow Box (76252)',
+        price: 19737,
         hasQty: true,
         featured: false
     }
