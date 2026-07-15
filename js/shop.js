@@ -71,7 +71,6 @@ function renderCart() {
     const totalEl = document.getElementById('cart-total-price');
     list.innerHTML = '';
 
-    // Make sure the checkout button exists right after the total, every time we render
     let checkoutBtn = document.getElementById('checkout-btn');
     if (!checkoutBtn) {
         checkoutBtn = document.createElement('button');
@@ -82,7 +81,6 @@ function renderCart() {
         checkoutBtn.addEventListener('click', checkout);
     }
 
-    // Make sure the Remove All button exists right after the checkout button
     let clearBtn = document.getElementById('clear-cart-btn');
     if (!clearBtn) {
         clearBtn = document.createElement('button');
