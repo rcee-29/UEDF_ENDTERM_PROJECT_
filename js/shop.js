@@ -61,6 +61,42 @@ const PRODUCTS = [
         price: 6106,
         hasQty: true,
         featured: false
+    },
+    {
+        category: 'ninjago',
+        image: './images/70751.jpg',
+        alt: 'ninjago',
+        name: 'Lego Ninjago: Temple of Airjitzu (70751)',
+        price: 12274,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'ninjago',
+        image: './images/71705.jpg',
+        alt: 'ninjago',
+        name: 'Lego Ninjago: Destinys Bounty (71705)',
+        price: 6353,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'ninjago',
+        image: './images/71741.jpg',
+        alt: 'ninjago',
+        name: 'Lego Ninjago: City Gardens (71741)',
+        price: 17270,
+        hasQty: true,
+        featured: false
+    },
+    {
+        category: 'ninjago',
+        image: './images/71870.jpg',
+        alt: 'ninjago',
+        name: 'Lego Ninjago: The Twin Titans Mech (71870)',
+        price: 14124,
+        hasQty: true,
+        featured: false
     }
 ];
 
