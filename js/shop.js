@@ -1,30 +1,30 @@
 const PRODUCTS = [
     {
         category: 'featured',
-        image:'./images/Featured1.jpg',
+        image: './images/Featured1.jpg',
         alt: 'Ferrari',
         name: 'Lego Speed Champions: Ferrari 499P (77261)',
-        price:1847,
-        hasQty:true,
-        featured:true
+        price: 1847,
+        hasQty: true,
+        featured: true
     },
     {
         category: 'featured',
-        image:'./images/Featured2.jpg',
+        image: './images/Featured2.jpg',
         alt: 'World Cup',
         name: 'Lego Editions: World Cup Trophy (43020)',
-        price:12320,
-        hasQty:true,
-        featured:true
+        price: 12320,
+        hasQty: true,
+        featured: true
     },
     {
         category: 'featured',
-        image:'./images/Featured3.jpg',
+        image: './images/Featured3.jpg',
         alt: 'Sorting Hat',
         name: 'Lego Harry Potter: Talking Sorting Hat (76249)',
-        price:6159,
-        hasQty:true,
-        featured:true
+        price: 6159,
+        hasQty: true,
+        featured: true
     },
     {
         category: 'star-wars',
@@ -63,29 +63,29 @@ const PRODUCTS = [
         featured: false
     }
 ];
- 
+
 function getCategoryFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get('category'); // returns null if no category in URL
 }
- 
+
 function renderProducts(category) {
     const container = document.getElementById('products-container');
- 
+
     let filteredProducts;
     if (category === 'featured') {
         filteredProducts = PRODUCTS.filter(p => p.featured === true);
     } else if (category) {
         filteredProducts = PRODUCTS.filter(p => p.category === category);
     } else {
-        filteredProducts = PRODUCTS; 
+        filteredProducts = PRODUCTS; // no category param = show everything
     }
- 
+
     if (filteredProducts.length === 0) {
         container.innerHTML = '<p class="no-products">No products found in this category.</p>';
         return;
     }
- 
+
     container.innerHTML = filteredProducts.map(p => `
         <div class="product" data-category="${p.category}">
             <img src="${p.image}" alt="${p.alt}" class="product-image">
@@ -106,21 +106,21 @@ function renderProducts(category) {
         </div>
     `).join('');
 }
- 
+
 function getCart() {
     return JSON.parse(localStorage.getItem('cart')) || [];
 }
- 
+
 function saveCart(cart) {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
- 
+
 function renderCart() {
     const cart = getCart();
     const list = document.getElementById('cart-items');
     const totalEl = document.getElementById('cart-total-price');
     list.innerHTML = '';
- 
+
     let checkoutBtn = document.getElementById('checkout-btn');
     if (!checkoutBtn) {
         checkoutBtn = document.createElement('button');
@@ -130,7 +130,7 @@ function renderCart() {
         totalEl.insertAdjacentElement('afterend', checkoutBtn);
         checkoutBtn.addEventListener('click', checkout);
     }
- 
+
     let clearBtn = document.getElementById('clear-cart-btn');
     if (!clearBtn) {
         clearBtn = document.createElement('button');
@@ -140,7 +140,7 @@ function renderCart() {
         checkoutBtn.insertAdjacentElement('afterend', clearBtn);
         clearBtn.addEventListener('click', clearCart);
     }
- 
+
     if (cart.length === 0) {
         list.innerHTML = '<li class="cart-empty">Your cart is empty.</li>';
         totalEl.textContent = '₱0.00';
@@ -148,132 +148,133 @@ function renderCart() {
         clearBtn.disabled = true;
         return;
     }
- 
+
     let total = 0;
     cart.forEach((item, index) => {
         const lineTotal = item.price * item.qty;
         total += lineTotal;
- 
+
         const li = document.createElement('li');
         const nameSpan = document.createElement('span');
         nameSpan.textContent = `${item.name} (${item.qty}x) - ₱${lineTotal.toFixed(2)}`;
- 
+
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
         removeBtn.className = 'cart-item-remove';
         removeBtn.addEventListener('click', () => removeFromCart(index));
- 
+
         li.appendChild(nameSpan);
         li.appendChild(removeBtn);
         list.appendChild(li);
     });
- 
+
     totalEl.textContent = `₱${total.toFixed(2)}`;
     checkoutBtn.disabled = false;
     clearBtn.disabled = false;
 }
- 
+
 function addToCart(name, price, qty = 1) {
     const cart = getCart();
     const existing = cart.find(item => item.name === name && item.price === price);
- 
+
     if (existing) {
         existing.qty += qty;
     } else {
         cart.push({ name, price, qty });
     }
- 
+
     saveCart(cart);
     renderCart();
 }
- 
+
 function removeFromCart(index) {
     const cart = getCart();
     cart.splice(index, 1);
     saveCart(cart);
     renderCart();
 }
- 
+
 function checkout() {
     const cart = getCart();
     if (cart.length === 0) return;
- 
+
     const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
     const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
- 
+
     alert(`Thank you for your order!\nItems: ${itemCount}\nTotal: ₱${total.toFixed(2)}`);
- 
+
     localStorage.removeItem('cart');
     renderCart();
 }
- 
+
 function clearCart() {
     const cart = getCart();
     if (cart.length === 0) return;
- 
+
     localStorage.removeItem('cart');
     renderCart();
 }
- 
+
 document.addEventListener('DOMContentLoaded', function () {
-    const initialCategory = getCategoryFromURL();
+   
+    const initialCategory = getCategoryFromURL() || 'featured';
     renderProducts(initialCategory);
     renderCart();
- 
+
     
     const initialBtn = document.querySelector(
-        `.category-btn[data-category="${initialCategory || 'featured'}"]`
+        `.category-btn[data-category="${initialCategory}"]`
     );
     if (initialBtn) initialBtn.classList.add('active');
- 
+
     const container = document.getElementById('products-container');
- 
-   
+
+    
     document.querySelector('.category-filters').addEventListener('click', (e) => {
         const btn = e.target.closest('.category-btn');
         if (!btn) return;
- 
+
         const category = btn.getAttribute('data-category');
         renderProducts(category);
- 
+
         
         const newUrl = category === 'featured'
             ? window.location.pathname
             : `${window.location.pathname}?category=${category}`;
         window.history.pushState({}, '', newUrl);
- 
+
         
         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     });
- 
+
     
     container.addEventListener('click', (e) => {
         const minusBtn = e.target.closest('.qty-minus');
         const plusBtn = e.target.closest('.qty-plus');
         if (!minusBtn && !plusBtn) return;
- 
+
         const input = e.target.closest('.qty-selector').querySelector('.qty-input');
         const min = parseInt(input.min, 10) || 1;
         let value = parseInt(input.value, 10) || min;
- 
+
         if (minusBtn) value = Math.max(min, value - 1);
         if (plusBtn) value = value + 1;
- 
+
         input.value = value;
     });
- 
+
     
     container.addEventListener('click', (e) => {
         const btn = e.target.closest('.add-to-cart-btn');
         if (!btn) return;
- 
+
         const name = btn.getAttribute('data-name');
         const price = parseFloat(btn.getAttribute('data-price'));
- 
+
         const qtyInput = btn.closest('.product-details').querySelector('.qty-input');
         const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
- 
+
         addToCart(name, price, qty);
     });
 });
