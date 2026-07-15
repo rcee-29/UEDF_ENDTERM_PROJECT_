@@ -3,7 +3,7 @@ const PRODUCTS = [
         category: 'featured',
         image: './images/Featured1.jpg',
         alt: 'Ferrari',
-        name: 'Lego Speed Champions: Ferrari 499P (77261)',
+        name: 'LEGO Speed Champions: Ferrari 499P (77261)',
         price: 1847,
         hasQty: true,
         featured: true
@@ -12,7 +12,7 @@ const PRODUCTS = [
         category: 'featured',
         image: './images/Featured2.jpg',
         alt: 'World Cup',
-        name: 'Lego Editions: World Cup Trophy (43020)',
+        name: 'LEGO Editions: World Cup Trophy (43020)',
         price: 12320,
         hasQty: true,
         featured: true
@@ -21,7 +21,7 @@ const PRODUCTS = [
         category: 'featured',
         image: './images/Featured3.jpg',
         alt: 'Sorting Hat',
-        name: 'Lego Harry Potter: Talking Sorting Hat (76249)',
+        name: 'LEGO Harry Potter: Talking Sorting Hat (76249)',
         price: 6159,
         hasQty: true,
         featured: true
@@ -42,22 +42,40 @@ const PRODUCTS = [
         name: 'LEGO Star Wars: Death Star (75419)',
         price: 61619,
         hasQty: true,
-        featured: false
+        featured: true
+    },
+    {
+        category: 'star-wars',
+        image:'./images/TieFighter.jpg',
+        alt: 'Tie Fighter',
+        name: 'LEGO Star Wars: Tie Fighter (75095)',
+        price:14120,
+        hasQty:true,
+        featured:true
+    },
+    {
+        category: 'star-wars',
+        image:'./images/XWing.jpg',
+        alt: 'xwing',
+        name: 'LEGO Star Wars: X-Wing Starfighter UCS (75355)',
+        price:15422,
+        hasQty:true,
+        featured:false
     },
     {
         category: 'star-wars',
         image: './images/75288.jpg',
         alt: 'LEGO Star Wars: AT-AT',
-        name: 'LEGO Star Wars: AT-AT Walker(75288)',
+        name: 'LEGO Star Wars: AT-AT Walker (75288)',
         price: 8326,
         hasQty: true,
-        featured: true
+        featured: false
     },
     {
         category: 'star-wars',
         image: './images/75379_alt2.jpg',
         alt: 'LEGO Star Wars: R2D2',
-        name: 'LEGO Star Wars: R2D2 (75379)',
+        name: 'LEGO Star Wars: R2D2 Special Set (75379)',
         price: 6106,
         hasQty: true,
         featured: false
@@ -66,7 +84,7 @@ const PRODUCTS = [
         category: 'ninjago',
         image: './images/70751.jpg',
         alt: 'ninjago',
-        name: 'Lego Ninjago: Temple of Airjitzu (70751)',
+        name: 'LEGO Ninjago: Temple of Airjitzu (70751)',
         price: 12274,
         hasQty: true,
         featured: false
@@ -75,7 +93,7 @@ const PRODUCTS = [
         category: 'ninjago',
         image: './images/71705.jpg',
         alt: 'ninjago',
-        name: 'Lego Ninjago: Destinys Bounty (71705)',
+        name: 'LEGO Ninjago: Destinys Bounty (71705)',
         price: 6353,
         hasQty: true,
         featured: false
@@ -84,16 +102,34 @@ const PRODUCTS = [
         category: 'ninjago',
         image: './images/71741_Prod.jpg',
         alt: 'ninjago',
-        name: 'Lego Ninjago: City Gardens (71741)',
+        name: 'LEGO Ninjago: The City Gardens (71741)',
         price: 17270,
         hasQty: true,
         featured: true
     },
     {
         category: 'ninjago',
+        image:'./images/citymarket.jpg',
+        alt: 'citymarket',
+        name: 'LEGO Ninjago: The City Markets (71799)',
+        price:22825,
+        hasQty:true,
+        featured:false
+    },
+    {
+        category: 'ninjago',
+        image:'./images/monastery.jpg',
+        alt: 'monastery',
+        name: 'LEGO Ninjago: Monastery of Spinjitzu (70670)',
+        price:4935,
+        hasQty:true,
+        featured:false
+    },
+    {
+        category: 'ninjago',
         image: './images/71870_Prod.jpg',
         alt: 'ninjago',
-        name: 'Lego Ninjago: The Twin Titans Mech (71870)',
+        name: 'LEGO Ninjago: The Twin Titans Mech (71870)',
         price: 14124,
         hasQty: true,
         featured: false
@@ -102,7 +138,7 @@ const PRODUCTS = [
         category: 'marvel',
         image: './images/76269.jpg',
         alt: 'marvel',
-        name: 'Lego Marvel: Avengers Tower (76269)',
+        name: 'LEGO Marvel: Avengers Tower (76269)',
         price: 30778,
         hasQty: true,
         featured: false
@@ -111,7 +147,7 @@ const PRODUCTS = [
         category: 'marvel',
         image: './images/76178_Prod.jpg',
         alt: 'marvel',
-        name: 'Lego Marvel: Daily Bugle (76178)',
+        name: 'LEGO Marvel: The Amazing Spider Man Daily Bugle (76178)',
         price: 21526,
         hasQty: true,
         featured: false
@@ -120,7 +156,7 @@ const PRODUCTS = [
         category: 'marvel',
         image: './images/76218.jpg',
         alt: 'marvel',
-        name: 'Lego Marvel: Sanctum Sanctorum(76218)',
+        name: 'LEGO Marvel: Sanctum Sanctorum (76218)',
         price: 12274,
         hasQty: true,
         featured: true
@@ -129,25 +165,52 @@ const PRODUCTS = [
         category: 'marvel',
         image: './images/76042.jpg',
         alt: 'marvel',
-        name: 'Lego Marvel:The SHIELD Helicarrier (76042)',
+        name: 'LEGO Marvel:The SHIELD Helicarrier (76042)',
         price: 21526,
         hasQty: true,
         featured: false
     },
     {
+        category: 'marvel',
+        image:'./images/bridgespiderman.jpg',
+        alt: 'bridgespider',
+        name: 'LEGO Marvel: Web Warriors Ultimate Bridge Battle (76057)',
+        price:6166,
+        hasQty:true,
+        featured:false
+    },
+    {
+        category: 'marvel',
+        image:'./images/IronMan.jpg',
+        alt: 'Ironman',
+        name: 'LEGO Marvel: Iron Man Mark 3 Collectors Edition (76344)',
+        price:8015,
+        hasQty:true,
+        featured:false
+    },
+    {
         category: 'dc-universe',
         image: './images/76240.jpg',
         alt: 'dc-universe',
-        name: 'Lego DC: Batmobile Tumbler (76240)',
+        name: 'LEGO DC Universe: Batmobile Tumbler (76240)',
         price: 13261,
         hasQty: true,
         featured: false
     },
     {
         category: 'dc-universe',
+        image:'./images/batwing.jpg',
+        alt: 'batwing',
+        name: 'LEGO DC Universe: 1989 Batwing (76161)',
+        price:12332,
+        hasQty:true,
+        featured:false
+    },
+    {
+        category: 'dc-universe',
         image: './images/70922.jpg',
         alt: 'dc-universe',
-        name: 'Lego DC: The Joker Manor (70922)',
+        name: 'LEGO DC Universe: The Joker Manor (70922)',
         price: 16592,
         hasQty: true,
         featured: false
@@ -156,16 +219,25 @@ const PRODUCTS = [
         category: 'dc-universe',
         image: './images/76300_Prod.jpg',
         alt: 'dc-universe',
-        name: 'Lego DC: Arkham Asylum (76300)',
+        name: 'LEGO DC Universe: Arkham Asylum (76300)',
         price: 24610,
         hasQty: true,
         featured: true
     },
     {
         category: 'dc-universe',
+        image:'./images/batmobileclassic.jpg',
+        alt: 'batmanclassic',
+        name: 'LEGO DC Universe: The Classic TV Series Batmobile (76328)',
+        price:9249,
+        hasQty:true,
+        featured:false
+    },
+    {
+        category: 'dc-universe',
         image: './images/76252.jpg',
         alt: 'dc-universe',
-        name: 'Lego DC: Batcave - Shadow Box (76252)',
+        name: 'LEGO DC Universe: Batcave - Shadow Box (76252)',
         price: 19737,
         hasQty: true,
         featured: false
@@ -174,7 +246,7 @@ const PRODUCTS = [
 
 function getCategoryFromURL() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('category'); // returns null if no category in URL
+    return params.get('category'); 
 }
 
 function renderProducts(category) {
@@ -186,7 +258,7 @@ function renderProducts(category) {
     } else if (category) {
         filteredProducts = PRODUCTS.filter(p => p.category === category);
     } else {
-        filteredProducts = PRODUCTS; // no category param = show everything
+        filteredProducts = PRODUCTS; 
     }
 
     if (filteredProducts.length === 0) {
