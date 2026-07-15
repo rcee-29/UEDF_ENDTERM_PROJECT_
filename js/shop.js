@@ -1,11 +1,39 @@
 const PRODUCTS = [
     {
+        category: 'featured',
+        image:'./images/Featured1.jpg',
+        alt: 'Ferrari',
+        name: 'Lego Speed Champions: Ferrari 499P (77261)',
+        price:1847,
+        hasQty:true,
+        featured:true
+    },
+    {
+        category: 'featured',
+        image:'./images/Featured2.jpg',
+        alt: 'World Cup',
+        name: 'Lego Editions: World Cup Trophy (43020)',
+        price:12320,
+        hasQty:true,
+        featured:true
+    },
+    {
+        category: 'featured',
+        image:'./images/Featured3.jpg',
+        alt: 'Sorting Hat',
+        name: 'Lego Harry Potter: Talking Sorting Hat (76249)',
+        price:6159,
+        hasQty:true,
+        featured:true
+    },
+    {
         category: 'star-wars',
         image: './images/75192_Prod.jpg',
         alt: 'LEGO Star Wars: Millennium Falcon',
         name: 'LEGO Star Wars: Millennium Falcon (75192)',
         price: 52498,
-        hasQty: true
+        hasQty: true,
+        featured: true
     },
     {
         category: 'star-wars',
@@ -13,7 +41,8 @@ const PRODUCTS = [
         alt: 'LEGO Star Wars: Death Star',
         name: 'LEGO Star Wars: Death Star (75419)',
         price: 61619,
-        hasQty: true
+        hasQty: true,
+        featured: false
     },
     {
         category: 'star-wars',
@@ -21,7 +50,8 @@ const PRODUCTS = [
         alt: 'LEGO Star Wars: AT-AT',
         name: 'LEGO Star Wars: AT-AT Walker(75288)',
         price: 8326,
-        hasQty: true
+        hasQty: true,
+        featured: true
     },
     {
         category: 'star-wars',
@@ -29,14 +59,34 @@ const PRODUCTS = [
         alt: 'LEGO Star Wars: R2D2',
         name: 'LEGO Star Wars: R2D2 (75379)',
         price: 6106,
-        hasQty: true
+        hasQty: true,
+        featured: false
     }
 ];
  
-
-function renderProducts() {
+function getCategoryFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('category'); // returns null if no category in URL
+}
+ 
+function renderProducts(category) {
     const container = document.getElementById('products-container');
-    container.innerHTML = PRODUCTS.map(p => `
+ 
+    let filteredProducts;
+    if (category === 'featured') {
+        filteredProducts = PRODUCTS.filter(p => p.featured === true);
+    } else if (category) {
+        filteredProducts = PRODUCTS.filter(p => p.category === category);
+    } else {
+        filteredProducts = PRODUCTS; // no category param = show everything
+    }
+ 
+    if (filteredProducts.length === 0) {
+        container.innerHTML = '<p class="no-products">No products found in this category.</p>';
+        return;
+    }
+ 
+    container.innerHTML = filteredProducts.map(p => `
         <div class="product" data-category="${p.category}">
             <img src="${p.image}" alt="${p.alt}" class="product-image">
             <div class="product-details">
@@ -45,7 +95,7 @@ function renderProducts() {
                 ${p.hasQty ? `
                 <div class="product-qty">
                   <label>Qty: </label>
-                  <div class= "qty-selector">
+                  <div class="qty-selector">
                     <button type="button" class="qty-btn qty-minus">−</button>
                     <input type="number" class="qty-input" value="1" min="1">
                     <button type="button" class="qty-btn qty-plus">+</button>
@@ -70,7 +120,7 @@ function renderCart() {
     const list = document.getElementById('cart-items');
     const totalEl = document.getElementById('cart-total-price');
     list.innerHTML = '';
-
+ 
     let checkoutBtn = document.getElementById('checkout-btn');
     if (!checkoutBtn) {
         checkoutBtn = document.createElement('button');
@@ -80,7 +130,7 @@ function renderCart() {
         totalEl.insertAdjacentElement('afterend', checkoutBtn);
         checkoutBtn.addEventListener('click', checkout);
     }
-
+ 
     let clearBtn = document.getElementById('clear-cart-btn');
     if (!clearBtn) {
         clearBtn = document.createElement('button');
@@ -103,7 +153,7 @@ function renderCart() {
     cart.forEach((item, index) => {
         const lineTotal = item.price * item.qty;
         total += lineTotal;
-
+ 
         const li = document.createElement('li');
         const nameSpan = document.createElement('span');
         nameSpan.textContent = `${item.name} (${item.qty}x) - ₱${lineTotal.toFixed(2)}`;
@@ -126,13 +176,13 @@ function renderCart() {
 function addToCart(name, price, qty = 1) {
     const cart = getCart();
     const existing = cart.find(item => item.name === name && item.price === price);
-
+ 
     if (existing) {
         existing.qty += qty;
     } else {
         cart.push({ name, price, qty });
     }
-
+ 
     saveCart(cart);
     renderCart();
 }
@@ -143,59 +193,87 @@ function removeFromCart(index) {
     saveCart(cart);
     renderCart();
 }
-
+ 
 function checkout() {
     const cart = getCart();
     if (cart.length === 0) return;
-
+ 
     const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
     const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
-
+ 
     alert(`Thank you for your order!\nItems: ${itemCount}\nTotal: ₱${total.toFixed(2)}`);
-
+ 
     localStorage.removeItem('cart');
     renderCart();
 }
-
+ 
 function clearCart() {
     const cart = getCart();
     if (cart.length === 0) return;
-
+ 
     localStorage.removeItem('cart');
     renderCart();
 }
  
 document.addEventListener('DOMContentLoaded', function () {
-    renderProducts();
+    const initialCategory = getCategoryFromURL();
+    renderProducts(initialCategory);
     renderCart();
-
+ 
+    // highlight the button matching the initial category (if any) on page load
+    const initialBtn = document.querySelector(
+        `.category-btn[data-category="${initialCategory || 'featured'}"]`
+    );
+    if (initialBtn) initialBtn.classList.add('active');
+ 
     const container = document.getElementById('products-container');
-
+ 
+    // Category button clicks
+    document.querySelector('.category-filters').addEventListener('click', (e) => {
+        const btn = e.target.closest('.category-btn');
+        if (!btn) return;
+ 
+        const category = btn.getAttribute('data-category');
+        renderProducts(category);
+ 
+        // keep the URL in sync so refresh/back button still works
+        const newUrl = category === 'featured'
+            ? window.location.pathname
+            : `${window.location.pathname}?category=${category}`;
+        window.history.pushState({}, '', newUrl);
+ 
+        // highlight the active button
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+ 
+    // Listener: qty +/- buttons
     container.addEventListener('click', (e) => {
         const minusBtn = e.target.closest('.qty-minus');
         const plusBtn = e.target.closest('.qty-plus');
         if (!minusBtn && !plusBtn) return;
-
+ 
         const input = e.target.closest('.qty-selector').querySelector('.qty-input');
         const min = parseInt(input.min, 10) || 1;
         let value = parseInt(input.value, 10) || min;
-
+ 
         if (minusBtn) value = Math.max(min, value - 1);
         if (plusBtn) value = value + 1;
-
+ 
         input.value = value;
     });
-
+ 
+    // Listener: add to cart
     container.addEventListener('click', (e) => {
         const btn = e.target.closest('.add-to-cart-btn');
         if (!btn) return;
-
+ 
         const name = btn.getAttribute('data-name');
         const price = parseFloat(btn.getAttribute('data-price'));
-
+ 
         const qtyInput = btn.closest('.product-details').querySelector('.qty-input');
         const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
-
+ 
         addToCart(name, price, qty);
     });
 });
