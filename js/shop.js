@@ -66,7 +66,8 @@ const PRODUCTS = [
  
 function getCategoryFromURL() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('category'); 
+    return params.get('category'); // returns null if no category in URL
+}
  
 function renderProducts(category) {
     const container = document.getElementById('products-container');
@@ -219,6 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderProducts(initialCategory);
     renderCart();
  
+    
     const initialBtn = document.querySelector(
         `.category-btn[data-category="${initialCategory || 'featured'}"]`
     );
@@ -226,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
  
     const container = document.getElementById('products-container');
  
+   
     document.querySelector('.category-filters').addEventListener('click', (e) => {
         const btn = e.target.closest('.category-btn');
         if (!btn) return;
@@ -233,15 +236,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const category = btn.getAttribute('data-category');
         renderProducts(category);
  
+        
         const newUrl = category === 'featured'
             ? window.location.pathname
             : `${window.location.pathname}?category=${category}`;
         window.history.pushState({}, '', newUrl);
  
+        
         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     });
  
+    
     container.addEventListener('click', (e) => {
         const minusBtn = e.target.closest('.qty-minus');
         const plusBtn = e.target.closest('.qty-plus');
@@ -257,6 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
         input.value = value;
     });
  
+    
     container.addEventListener('click', (e) => {
         const btn = e.target.closest('.add-to-cart-btn');
         if (!btn) return;
