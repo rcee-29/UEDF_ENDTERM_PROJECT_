@@ -169,7 +169,7 @@ const PRODUCTS = [
         price: 19737,
         hasQty: true,
         featured: false
-    }
+    },
 ];
 
 function getCategoryFromURL() {
