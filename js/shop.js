@@ -66,8 +66,7 @@ const PRODUCTS = [
  
 function getCategoryFromURL() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('category'); // returns null if no category in URL
-}
+    return params.get('category'); 
  
 function renderProducts(category) {
     const container = document.getElementById('products-container');
@@ -78,7 +77,7 @@ function renderProducts(category) {
     } else if (category) {
         filteredProducts = PRODUCTS.filter(p => p.category === category);
     } else {
-        filteredProducts = PRODUCTS; // no category param = show everything
+        filteredProducts = PRODUCTS; 
     }
  
     if (filteredProducts.length === 0) {
@@ -220,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function () {
     renderProducts(initialCategory);
     renderCart();
  
-    // highlight the button matching the initial category (if any) on page load
     const initialBtn = document.querySelector(
         `.category-btn[data-category="${initialCategory || 'featured'}"]`
     );
@@ -228,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function () {
  
     const container = document.getElementById('products-container');
  
-    // Category button clicks
     document.querySelector('.category-filters').addEventListener('click', (e) => {
         const btn = e.target.closest('.category-btn');
         if (!btn) return;
@@ -236,18 +233,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const category = btn.getAttribute('data-category');
         renderProducts(category);
  
-        // keep the URL in sync so refresh/back button still works
         const newUrl = category === 'featured'
             ? window.location.pathname
             : `${window.location.pathname}?category=${category}`;
         window.history.pushState({}, '', newUrl);
  
-        // highlight the active button
         document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
     });
  
-    // Listener: qty +/- buttons
     container.addEventListener('click', (e) => {
         const minusBtn = e.target.closest('.qty-minus');
         const plusBtn = e.target.closest('.qty-plus');
@@ -263,7 +257,6 @@ document.addEventListener('DOMContentLoaded', function () {
         input.value = value;
     });
  
-    // Listener: add to cart
     container.addEventListener('click', (e) => {
         const btn = e.target.closest('.add-to-cart-btn');
         if (!btn) return;
