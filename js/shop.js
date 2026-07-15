@@ -135,36 +135,36 @@ const PRODUCTS = [
         featured: false
     },
     {
-        category: 'DC',
+        category: 'dc-universe',
         image: './images/76240.jpg',
-        alt: 'DC',
+        alt: 'dc-universe',
         name: 'Lego DC: Batmobile Tumbler (76240)',
         price: 13261,
         hasQty: true,
         featured: false
     },
     {
-        category: 'DC',
+        category: 'dc-universe',
         image: './images/70922.jpg',
-        alt: 'DC',
+        alt: 'dc-universe',
         name: 'Lego DC: The Joker Manor (70922)',
         price: 16592,
         hasQty: true,
         featured: false
     },
     {
-        category: 'DC',
+        category: 'dc-universe',
         image: './images/76300_Prod.jpg',
-        alt: 'DC',
+        alt: 'dc-universe',
         name: 'Lego DC: Arkham Asylum (76300)',
         price: 24610,
         hasQty: true,
         featured: true
     },
     {
-        category: 'DC',
+        category: 'dc-universe',
         image: './images/76252.jpg',
-        alt: 'DC',
+        alt: 'dc-universe',
         name: 'Lego DC: Batcave - Shadow Box (76252)',
         price: 19737,
         hasQty: true,
